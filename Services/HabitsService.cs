@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 using habitsWebapi.Models;
-
+using habitsWebapi.Interfaces;
 
 namespace habitsWebapi.Services
 {
-  public class HabitsService 
+  public class HabitsService : IHabitsService
   {
     public IEnumerable<Habit> getHabits()
     {
@@ -19,7 +19,8 @@ namespace habitsWebapi.Services
             };
     }
 
-    public Habit getHabitById(int id) {
+    public Habit getHabitById(int id) 
+    {
       return new Habit { Id = 1, Name = "Write more source code", Description = "This is the description" };
     }
   }

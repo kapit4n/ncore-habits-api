@@ -5,24 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using habitsWebapi.Models;
 using habitsWebapi.Services;
+using habitsWebapi.Interfaces;
 
 namespace habitsWebapi.Controllers
 {
   [Route("api/[controller]")]
   public class HabitsController : Controller
   {
+
+    private readonly IHabitsService _habitsService;
+
+    public HabitsController(IHabitsService habitsService)
+    {
+      _habitsService = habitsService;
+    }
+
     // GET api/habits
     [HttpGet]
     public IEnumerable<Habit> Get()
     {
-      return new HabitsService().getHabits();
+      return _habitsService.getHabits();
     }
 
     // GET api/habits/5
     [HttpGet("{id}")]
     public Habit Get(int id)
     {
-      return new HabitsService().getHabitById(id);
+      return _habitsService.getHabitById(id);
     }
 
     // POST api/habits
